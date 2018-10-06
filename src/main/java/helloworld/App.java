@@ -22,7 +22,10 @@ public class App implements RequestHandler<Object, Object> {
         headers.put("X-Custom-Header", "application/json");
         try {
             final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
-            String output = String.format("{ \"message\": \"hello world2\", \"location\": \"%s\" }", pageContents);
+
+            Map<String, Object> map = ScheduleManager.INSTANCE.getItem("20181016/PHIBOS");
+
+            String output = String.format("{ \"message\": \"hello world2\", \"data\": \"%s\", \"location\": \"%s\" }", map, pageContents);
             return new GatewayResponse(output, headers, 200);
         } catch (IOException e) {
             return new GatewayResponse("{}", headers, 500);

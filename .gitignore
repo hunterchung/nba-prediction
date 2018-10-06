@@ -68,3 +68,4 @@ fabric.properties
 # project specific
 lib/
 notebooks/
+build/

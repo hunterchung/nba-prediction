@@ -12,7 +12,7 @@ This is a sample template for nba-prediction - Below is a brief explanation of w
 │   │       └── helloworld                  <-- Source code for a lambda function
 │   │           ├── App.java                <-- Lambda function code
 │   │           └── GatewayResponse.java    <-- POJO for API Gateway Responses object 
-│   └── test                                <-- Unit tests
+│   └── nba                                <-- Unit tests
 │       └── java
 │           └── helloworld
 │               └── AppTest.java
@@ -109,7 +109,7 @@ aws cloudformation describe-stacks \
 We use `JUnit` for testing our code and you can simply run the following command to run our tests:
 
 ```bash
-mvn test
+mvn nba
 ```
 
 # Appendix
@@ -139,7 +139,7 @@ aws cloudformation describe-stacks \
 Here are a few ideas that you can use to get more acquainted as to how this overall process works:
 
 * Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit test to capture that
+* Update unit nba to capture that
 * Package & Deploy
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
