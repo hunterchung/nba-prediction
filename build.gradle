@@ -1,0 +1,55 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        //Gradle shadow plugin
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group = 'helloworld'
+version = '1.0'
+
+description = """A sample Hello World created for SAM CLI."""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories { jcenter() }
+dependencies {
+    //AWS Lambda core library
+    compile 'com.amazonaws:aws-lambda-java-core:1.2.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'com.amazonaws:aws-java-sdk-core:1.11.422'
+    compile 'com.amazonaws:aws-java-sdk:1.11.423'
+    compile 'com.amazonaws:aws-java-sdk-dynamodb:1.11.422'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip
