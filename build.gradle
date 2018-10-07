@@ -18,6 +18,10 @@ repositories { jcenter() }
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+    //Alexa
+    compile 'com.amazon.alexa:ask-sdk-runtime:2.7.1'
+    compile 'commons-io:commons-io:2.6'
+
     //AWS Lambda core library
     compile(
         'com.amazonaws:aws-lambda-java-core:1.2.0',
