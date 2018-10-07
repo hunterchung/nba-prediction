@@ -1,8 +1,9 @@
-package helloworld
+package nba
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest
+import java.lang.Exception
 
 
 object ScheduleManager {
@@ -10,13 +11,19 @@ object ScheduleManager {
 
     private val client = AmazonDynamoDBClientBuilder.defaultClient()
 
-    fun getItem(gameId: String): Map<String, Any>? {
+    fun getItem(gameId: String): Game? {
         val key = mapOf("gameUrlCode" to AttributeValue(gameId))
 
         val request = GetItemRequest()
             .withTableName(TABLE_NAME)
             .withKey(key)
 
-        return client.getItem(request).item
+        val item = client.getItem(request)?.item ?: return null
+
+        return try {
+            Game.from(item)
+        } catch (e: Exception) {
+            return null
+        }
     }
 }
