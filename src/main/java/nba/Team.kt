@@ -31,10 +31,4 @@ enum class Team(val id: String) {
     TORONTO_RAPTORS("1610612761"),
     UTAH_JAZZ("1610612762"),
     WASHINGTON_WIZARDS("1610612764");
-
-    companion object {
-        fun getTeam(team: String): Team {
-            return Team.valueOf(team)
-        }
-    }
 }
