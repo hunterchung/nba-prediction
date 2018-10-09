@@ -19,7 +19,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     //Alexa
-    compile 'com.amazon.alexa:ask-sdk-runtime:2.7.1'
+    compile 'com.amazon.alexa:ask-sdk:2.7.1'
     compile 'commons-io:commons-io:2.6'
 
     //AWS Lambda core library
@@ -53,3 +53,16 @@ task buildZip(type: Zip) {
 }
 
 build.dependsOn buildZip
+
+//task localTest(type:Exec) {
+//    dependsOn build
+//    commandLine '/Users/hunterchung/Library/Python/2.7/bin/sam'
+////    local invoke HelloWorldFunction -e sampleInput/basic.json'
+//    standardOutput new ByteArrayOutputStream()
+//    errorOutput    new ByteArrayOutputStream()
+//
+//    doLast {
+//        logger.info(standardOutput.toString())
+//        logger.error(errorOutput.toString())
+//    }
+//}

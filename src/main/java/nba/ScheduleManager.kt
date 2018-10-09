@@ -3,7 +3,11 @@ package nba
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest
+import com.amazonaws.services.dynamodbv2.model.ScanRequest
 import java.lang.Exception
+import java.lang.IllegalStateException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 object ScheduleManager {
@@ -25,5 +29,26 @@ object ScheduleManager {
         } catch (e: Exception) {
             return null
         }
+    }
+
+    fun fetchGame(date: LocalDate, team: Team): Game? {
+        val attributeValueMap = mapOf(":startDate" to AttributeValue(date.format(DateTimeFormatter.BASIC_ISO_DATE)))
+
+        val scanRequest = ScanRequest()
+            .withTableName(TABLE_NAME)
+            .withFilterExpression("startDate = :startDate")
+            .withExpressionAttributeValues(attributeValueMap)
+
+        val result = client.scan(scanRequest)
+
+        val games = result.items
+            .asSequence()
+            .map { Game.from(it) }
+            .filter { it.homeTeam == team || it.visitorTeam == team }
+            .toList()
+
+        if (games.size > 1) throw IllegalStateException("Has more than 1 game on this date.")
+
+        return games.firstOrNull()
     }
 }
