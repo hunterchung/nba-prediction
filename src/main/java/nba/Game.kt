@@ -1,12 +1,39 @@
 package nba
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
-import java.lang.IllegalArgumentException
+import kotlinx.serialization.Serializable
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+@Serializable
+@DynamoDBTable(tableName = "NBA_schedule")
+class Game() {
+    @DynamoDBAttribute
+    lateinit var id: String
 
-data class Game(val id: String, val urlCode: String, val homeTeam: Team, val visitorTeam: Team, val startDate: LocalDate) {
+    @DynamoDBHashKey(attributeName = "gameUrlCode")
+    lateinit var urlCode: String
+
+    @DynamoDBAttribute
+    lateinit var homeTeam: Team
+
+    @DynamoDBAttribute
+    lateinit var visitorTeam: Team
+
+    @DynamoDBAttribute
+    lateinit var startDate: LocalDate
+
+    constructor(id: String, urlCode: String, homeTeam: Team, visitorTeam: Team, startDate: LocalDate) : this() {
+        this.id = id
+        this.urlCode = urlCode
+        this.homeTeam = homeTeam
+        this.visitorTeam = visitorTeam
+        this.startDate = startDate
+    }
+
     companion object {
         fun from(map:  Map<String, AttributeValue>): Game {
             val id = map["gameId"]?.s ?: throw IllegalArgumentException("Cannot find game id")
@@ -20,7 +47,7 @@ data class Game(val id: String, val urlCode: String, val homeTeam: Team, val vis
                 DateTimeFormatter.BASIC_ISO_DATE
             )
 
-            return Game(id, urlCode, homeTeam, visitorTeam, startDate)
+            return Game()
         }
     }
 }

@@ -5,10 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.IntentRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
-import nba.Game
-import nba.PredictInput
-import nba.ScheduleManager
-import nba.Team
+import nba.*
 import java.time.LocalDate
 import java.util.*
 
@@ -22,7 +19,10 @@ class PredictIntentHandler : RequestHandler {
         val game = ScheduleManager.fetchGame(predictInput.date, predictInput.team)
         val speechText = getSpeechText(game, predictInput.team, predictInput.date)
 
-//        savePrediction(input.requestEnvelope.session.user, game, predictInput.team, intentRequest.timestamp)
+        val test = Game("123", "avc", Team.ATLANTA_HAWKS, Team.BOSTON_CELTICS, LocalDate.now())
+        val prediction =
+            Prediction(input.requestEnvelope.session.user.userId, test, predictInput.team, intentRequest.timestamp)
+        PredictionManager.savePrediction(prediction)
 
         return input.responseBuilder
             .withSpeech(speechText)
@@ -36,10 +36,4 @@ class PredictIntentHandler : RequestHandler {
 
         return "There is a ${team.name} game on $date"
     }
-
-//    private fun savePrediction(user: User, game: Game?, team: Team, timestamp: OffsetDateTime) {
-//        if (game == null) return
-//
-//        val prediction = Prediction(user, game, team, timestamp)
-//    }
 }

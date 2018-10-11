@@ -1,11 +1,10 @@
 package nba
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest
 import com.amazonaws.services.dynamodbv2.model.ScanRequest
-import java.lang.Exception
-import java.lang.IllegalStateException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -14,6 +13,7 @@ object ScheduleManager {
     private const val TABLE_NAME = "NBA_schedule"
 
     private val client = AmazonDynamoDBClientBuilder.defaultClient()
+    private val mapper = DynamoDBMapper(client)
 
     fun getItem(gameId: String): Game? {
         val key = mapOf("gameUrlCode" to AttributeValue(gameId))
@@ -51,4 +51,6 @@ object ScheduleManager {
 
         return games.firstOrNull()
     }
+
+    fun getOne(): Game? = mapper.load(Game::class.java, "20181016/PHIBOS")
 }
