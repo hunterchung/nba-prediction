@@ -2,7 +2,6 @@ package helloworld
 
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
-import nba.ScheduleManager
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -21,11 +20,8 @@ class App : RequestHandler<Any, Any> {
         return try {
             val pageContents = this.getPageContents("https://checkip.amazonaws.com")
 
-            val map = ScheduleManager.getItem("20181016/PHIBOS")
-
             val output = String.format(
-                "{ \"message\": \"hello world2\", \"data\": \"%s\", \"location\": \"%s\" }",
-                map,
+                """{ "message": "hello world2", "location": "%s" }""",
                 pageContents
             )
             GatewayResponse(output, headers, 200)

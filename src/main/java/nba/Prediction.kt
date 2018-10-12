@@ -2,7 +2,8 @@ package nba
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import helloworld.common.OffsetDateTimeConverter
-import nba.dynamoDBConverter.GameTypeConverter
+import nba.data.converter.GameTypeConverter
+import nba.data.converter.TeamTypeConverter
 import java.time.OffsetDateTime
 
 @DynamoDBTable(tableName = "NBA_prediction")
@@ -13,7 +14,7 @@ class Prediction() {
     @DynamoDBTypeConverted(converter = GameTypeConverter::class)
     lateinit var game: Game
 
-    @DynamoDBTypeConvertedEnum
+    @DynamoDBTypeConverted(converter = TeamTypeConverter::class)
     lateinit var team: Team
 
     @DynamoDBTypeConverted(converter = OffsetDateTimeConverter::class)

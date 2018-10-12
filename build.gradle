@@ -44,13 +44,13 @@ dependencies {
     compile 'com.amazon.alexa:ask-sdk:2.7.1'
     compile 'commons-io:commons-io:2.6'
 
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+    compile 'org.apache.logging.log4j:log4j-core:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-api:2.8.2'
 
     //AWS Lambda core library
     compile(
         'com.amazonaws:aws-lambda-java-core:1.2.0',
-        'com.amazonaws:aws-lambda-java-log4j:1.0.0',
+        'com.amazonaws:aws-lambda-java-log4j2:1.0.0',
         'com.amazonaws:aws-java-sdk-dynamodb:1.11.422'
     )
 
