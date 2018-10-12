@@ -1,4 +1,4 @@
-package helloworld.common
+package hunterchung.common
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter
 import java.time.OffsetDateTime

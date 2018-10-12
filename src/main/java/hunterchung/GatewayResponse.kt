@@ -1,4 +1,4 @@
-package helloworld
+package hunterchung
 
 /**
  * POJO containing response object for API Gateway.

@@ -1,4 +1,4 @@
-package helloworld.extensions
+package hunterchung.extensions
 
 import com.amazon.ask.model.Slot
 

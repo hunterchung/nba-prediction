@@ -1,7 +1,7 @@
 package nba
 
 import com.amazon.ask.model.IntentRequest
-import helloworld.extensions.getTopResolutionValue
+import hunterchung.extensions.getTopResolutionValue
 import java.time.LocalDate
 
 data class PredictInput(val team: Team, val date: LocalDate) {

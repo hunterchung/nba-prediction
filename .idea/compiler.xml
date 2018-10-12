@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="HelloWorld_main" target="1.8" />
       <module name="HelloWorld_test" target="1.8" />
+      <module name="nba-prediction_main" target="1.8" />
+      <module name="nba-prediction_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

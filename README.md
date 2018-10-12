@@ -9,12 +9,12 @@ This is a sample template for nba-prediction - Below is a brief explanation of w
 ├── src
 │   ├── main
 │   │   └── java
-│   │       └── helloworld                  <-- Source code for a lambda function
+│   │       └── hunterchung                  <-- Source code for a lambda function
 │   │           ├── App.java                <-- Lambda function code
 │   │           └── GatewayResponse.java    <-- POJO for API Gateway Responses object 
 │   └── nba                                <-- Unit tests
 │       └── java
-│           └── helloworld
+│           └── hunterchung
 │               └── AppTest.java
 └── template.yaml
 ```
@@ -67,7 +67,7 @@ AWS Lambda Java runtime accepts either a zip file or a standalone JAR file - We 
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: target/HelloWorld-1.0.jar
-            Handler: helloworld.App::handleRequest
+            Handler: hunterchungg
 ```
 
 Firstly, we need a `S3 bucket` where we can upload our Lambda functions packaged as ZIP before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:

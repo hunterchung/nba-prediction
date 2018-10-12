@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/HelloWorld.iml" filepath="$PROJECT_DIR$/.idea/modules/HelloWorld.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/HelloWorld_main.iml" filepath="$PROJECT_DIR$/.idea/modules/HelloWorld_main.iml" group="HelloWorld" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/HelloWorld_test.iml" filepath="$PROJECT_DIR$/.idea/modules/HelloWorld_test.iml" group="HelloWorld" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nba-prediction.iml" filepath="$PROJECT_DIR$/.idea/modules/nba-prediction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nba-prediction_main.iml" filepath="$PROJECT_DIR$/.idea/modules/nba-prediction_main.iml" group="nba-prediction" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nba-prediction_test.iml" filepath="$PROJECT_DIR$/.idea/modules/nba-prediction_test.iml" group="nba-prediction" />
     </modules>
   </component>
 </project>

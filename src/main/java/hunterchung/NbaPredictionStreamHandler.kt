@@ -1,11 +1,11 @@
-package helloworld
+package hunterchung
 
 import com.amazon.ask.SkillStreamHandler
 import com.amazon.ask.Skills
-import helloworld.handler.PredictIntentHandler
+import hunterchung.handler.PredictIntentHandler
 
 
-class HelloWorldStreamHandler : SkillStreamHandler(HelloWorldStreamHandler.skill) {
+class NbaPredictionStreamHandler : SkillStreamHandler(NbaPredictionStreamHandler.skill) {
     companion object {
         private val skill = Skills.standard()
             .addRequestHandlers(
