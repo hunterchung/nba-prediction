@@ -33,4 +33,6 @@ enum class Team(val id: String) {
     WASHINGTON_WIZARDS("1610612764"),
 
     PLACEHOLDER("000");
+
+    val readName = name.split("_").joinToString(" ") { it.toLowerCase().capitalize() }
 }

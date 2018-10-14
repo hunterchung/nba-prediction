@@ -7,11 +7,14 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
 import nba.PredictInput
 import nba.Prediction
+import nba.PredictionManager
 import nba.ScheduleManager
-import nba.data.DynamoDBUtil
 import org.apache.logging.log4j.LogManager
 import java.util.*
 
+/**
+ * Handle prediction intent.
+ */
 class PredictIntentHandler : RequestHandler {
     companion object {
         private val logger = LogManager.getLogger(PredictIntentHandler::class.java)
@@ -26,17 +29,23 @@ class PredictIntentHandler : RequestHandler {
         val game = ScheduleManager.fetchGame(predictInput.date, predictInput.team)
 
         if (game == null) {
-            val responseText = "Cannot find ${predictInput.team.name} game on ${predictInput.date}"
+            val responseText = "Cannot find ${predictInput.team.readName} game on ${predictInput.date}"
             return input.responseBuilder
                 .withSpeech(responseText)
                 .withSimpleCard("NBA Prediction", responseText)
                 .build()
         } else {
             val prediction =
-                Prediction(input.requestEnvelope.session.user.userId, game, predictInput.team, intentRequest.timestamp)
-            DynamoDBUtil.mapper.save(prediction)
+                Prediction(
+                    input.requestEnvelope.session.user.userId,
+                    game.id,
+                    game,
+                    predictInput.team,
+                    intentRequest.timestamp
+                )
+            PredictionManager.savePrediction(prediction)
 
-            val responseText = "You predict ${predictInput.team.name} will win the game on ${predictInput.date}"
+            val responseText = "You predict ${predictInput.team.readName} will win the game on ${predictInput.date}"
             return input.responseBuilder
                 .withSpeech(responseText)
                 .withSimpleCard("NBA Prediction", responseText)

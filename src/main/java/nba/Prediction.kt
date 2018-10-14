@@ -5,38 +5,49 @@ import hunterchung.common.OffsetDateTimeConverter
 import nba.data.converter.GameTypeConverter
 import nba.data.converter.TeamTypeConverter
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
-@DynamoDBTable(tableName = "NBA_prediction")
-class Prediction() {
+@DynamoDBTable(tableName = Prediction.TABLE_NAME)
+data class Prediction(
     @DynamoDBHashKey
-    lateinit var userId: String
+    var userId: String,
+
+    @DynamoDBRangeKey
+    var gameId: String,
 
     @DynamoDBTypeConverted(converter = GameTypeConverter::class)
-    lateinit var game: Game
+    var game: Game,
 
     @DynamoDBTypeConverted(converter = TeamTypeConverter::class)
-    lateinit var team: Team
+    var team: Team,
 
     @DynamoDBTypeConverted(converter = OffsetDateTimeConverter::class)
-    @DynamoDBRangeKey
-    lateinit var timestamp: OffsetDateTime
+    var timestamp: OffsetDateTime,
 
     @DynamoDBTypeConvertedEnum
     var result: PredictionResult = PredictionResult.UNDETERMINED
+) {
+    constructor() : this(
+        userId = "",
+        gameId = "",
+        game = Game(),
+        team = Team.PLACEHOLDER,
+        timestamp = OffsetDateTime.MIN
+    )
 
-    constructor(
-        userId: String,
-        game: Game,
-        team: Team,
-        timestamp: OffsetDateTime,
-        result: PredictionResult = PredictionResult.UNDETERMINED
-    ) : this() {
-        this.userId = userId
-        this.game = game
-        this.team = team
-        this.timestamp = timestamp
-        this.result = result
+    companion object {
+        const val TABLE_NAME = "NBA_prediction"
     }
+
+    private val theOtherTeam: Team get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
+
+    fun toSpeech() = """
+        ${team.readName} will win against ${theOtherTeam.readName} on ${game.startTime.format(
+        DateTimeFormatter.ofPattern(
+            "MMMM dd"
+        )
+    )}.
+    """.trimIndent()
 }
 
 enum class PredictionResult {

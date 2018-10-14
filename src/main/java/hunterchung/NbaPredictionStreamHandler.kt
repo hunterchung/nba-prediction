@@ -2,6 +2,7 @@ package hunterchung
 
 import com.amazon.ask.SkillStreamHandler
 import com.amazon.ask.Skills
+import hunterchung.handler.MyPredictionHandler
 import hunterchung.handler.PredictIntentHandler
 
 
@@ -9,8 +10,9 @@ class NbaPredictionStreamHandler : SkillStreamHandler(NbaPredictionStreamHandler
     companion object {
         private val skill = Skills.standard()
             .addRequestHandlers(
+                PredictIntentHandler(),
+                MyPredictionHandler()
 //                CancelandStopIntentHandler(),
-                PredictIntentHandler()
 //                HelpIntentHandler(),
 //                LaunchRequestHandler(),
 //                SessionEndedRequestHandler(),

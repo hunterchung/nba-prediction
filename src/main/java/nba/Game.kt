@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted
 import kotlinx.serialization.Serializable
+import nba.data.converter.OffsetDateTimeSerializer
 import nba.data.converter.OffsetDateTimeTypeConverter
 import nba.data.converter.TeamTypeConverter
 import java.time.OffsetDateTime
@@ -27,6 +28,7 @@ data class Game(
     var visitorTeam: Team,
 
     @DynamoDBTypeConverted(converter = OffsetDateTimeTypeConverter::class)
+    @Serializable(with = OffsetDateTimeSerializer::class)
     var startTime: OffsetDateTime
 ) {
     constructor() : this(
