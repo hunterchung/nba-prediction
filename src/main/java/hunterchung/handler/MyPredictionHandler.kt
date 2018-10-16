@@ -2,15 +2,18 @@ package hunterchung.handler
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.dispatcher.request.handler.RequestHandler
+import com.amazon.ask.model.LaunchRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
+import com.amazon.ask.request.Predicates.requestType
 import nba.Prediction
 import nba.PredictionManager
 import java.util.*
 
 
 class MyPredictionHandler : RequestHandler {
-    override fun canHandle(input: HandlerInput) = input.matches(intentName("myPrediction"))
+    override fun canHandle(input: HandlerInput) =
+        input.matches(intentName("myPrediction")) || input.matches(requestType(LaunchRequest::class.java))
 
     override fun handle(input: HandlerInput?): Optional<Response> {
         val user =
