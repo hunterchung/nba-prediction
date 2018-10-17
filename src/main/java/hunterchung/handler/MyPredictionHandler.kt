@@ -30,7 +30,7 @@ class MyPredictionHandler : RequestHandler {
 
     private fun getResponseText(predictions: List<Prediction>): String {
         return when (predictions.size) {
-            0 -> "You do't have any prediction yet."
+            0 -> "You don't have any prediction yet."
             1 -> "Here is your prediction. ${predictions.first().toSpeech()}"
             10 -> "Here are your recent 10 predictions. ${predictions.joinToString(".\n") { it.toSpeech() }}"
             else -> "You have ${predictions.size} predictions. ${predictions.joinToString(".\n") { it.toSpeech() }}"
