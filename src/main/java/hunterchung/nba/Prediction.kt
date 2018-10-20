@@ -5,6 +5,7 @@ import hunterchung.common.OffsetDateTimeConverter
 import hunterchung.nba.data.converter.GameTypeConverter
 import hunterchung.nba.data.converter.TeamTypeConverter
 import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @DynamoDBTable(tableName = Prediction.TABLE_NAME)
@@ -41,8 +42,8 @@ data class Prediction(
 
     private val theOtherTeam: Team get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
 
-    fun toSpeech() = """
-        ${team.readName} will win against ${theOtherTeam.readName} on ${game.startTime.format(
+    fun toSpeech(timeZoneId: ZoneId) = """
+        ${team.readName} will win against ${theOtherTeam.readName} on ${game.startTime.atZoneSameInstant(timeZoneId).format(
         DateTimeFormatter.ofPattern(
             "MMMM dd"
         )

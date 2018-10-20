@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.IntentRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
+import hunterchung.call.GetUserTimeZone
 import hunterchung.nba.PredictInput
 import hunterchung.nba.Prediction
 import hunterchung.nba.PredictionManager
@@ -26,7 +27,9 @@ class PredictIntentHandler : RequestHandler {
         val intentRequest =
             input.request as? IntentRequest ?: throw IllegalArgumentException("Cannot Parse the request.")
         val predictInput = PredictInput.from(intentRequest)
-        val game = ScheduleManager.fetchGame(predictInput.date, predictInput.team)
+        val timeZoneId = GetUserTimeZone.call(input)
+
+        val game = ScheduleManager.fetchGame(predictInput.date.atStartOfDay(timeZoneId), predictInput.team)
 
         if (game == null) {
             val responseText = "Cannot find ${predictInput.team.readName} game on ${predictInput.date}"

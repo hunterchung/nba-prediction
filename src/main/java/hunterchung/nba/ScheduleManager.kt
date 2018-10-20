@@ -3,11 +3,11 @@ package hunterchung.nba
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import hunterchung.nba.data.DynamoDBUtil
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 
 object ScheduleManager {
-    fun fetchGame(date: LocalDate, team: Team): Game? {
+    fun fetchGame(date: ZonedDateTime, team: Team): Game? {
         val attributeValueMap = mapOf(
             ":startDate" to AttributeValue(date.toString()),
             ":teamId" to AttributeValue(team.id)
