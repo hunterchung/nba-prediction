@@ -1,9 +1,9 @@
-package nba
+package hunterchung.nba
 
 import com.amazon.ask.model.User
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
-import nba.data.DynamoDBUtil
+import hunterchung.nba.data.DynamoDBUtil
 
 object PredictionManager {
 

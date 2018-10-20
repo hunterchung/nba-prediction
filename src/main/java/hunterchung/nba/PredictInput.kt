@@ -1,4 +1,4 @@
-package nba
+package hunterchung.nba
 
 import com.amazon.ask.model.IntentRequest
 import hunterchung.extensions.getTopResolutionValue

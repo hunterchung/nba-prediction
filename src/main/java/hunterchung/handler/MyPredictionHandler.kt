@@ -6,8 +6,8 @@ import com.amazon.ask.model.LaunchRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.requestType
-import nba.Prediction
-import nba.PredictionManager
+import hunterchung.nba.Prediction
+import hunterchung.nba.PredictionManager
 import java.util.*
 
 

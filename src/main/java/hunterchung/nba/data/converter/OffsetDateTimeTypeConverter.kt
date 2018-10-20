@@ -1,4 +1,4 @@
-package nba.data.converter
+package hunterchung.nba.data.converter
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter
 import java.time.OffsetDateTime

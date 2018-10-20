@@ -1,8 +1,8 @@
-package nba
+package hunterchung.nba
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
-import nba.data.DynamoDBUtil
+import hunterchung.nba.data.DynamoDBUtil
 import java.time.LocalDate
 
 

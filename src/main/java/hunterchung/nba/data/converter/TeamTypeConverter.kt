@@ -1,7 +1,7 @@
-package nba.data.converter
+package hunterchung.nba.data.converter
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter
-import nba.Team
+import hunterchung.nba.Team
 
 class TeamTypeConverter : DynamoDBTypeConverter<String, Team> {
     override fun unconvert(s: String?) = Team.values().first { it.id == s }

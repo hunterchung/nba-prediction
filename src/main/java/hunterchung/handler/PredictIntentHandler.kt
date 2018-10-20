@@ -5,10 +5,10 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.IntentRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
-import nba.PredictInput
-import nba.Prediction
-import nba.PredictionManager
-import nba.ScheduleManager
+import hunterchung.nba.PredictInput
+import hunterchung.nba.Prediction
+import hunterchung.nba.PredictionManager
+import hunterchung.nba.ScheduleManager
 import org.apache.logging.log4j.LogManager
 import java.util.*
 

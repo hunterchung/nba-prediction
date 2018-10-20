@@ -1,4 +1,4 @@
-package nba
+package hunterchung.nba
 
 enum class Team(val id: String) {
     ATLANTA_HAWKS("1610612737"),

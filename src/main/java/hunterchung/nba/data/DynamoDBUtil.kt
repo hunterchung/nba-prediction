@@ -1,4 +1,4 @@
-package nba.data
+package hunterchung.nba.data
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper

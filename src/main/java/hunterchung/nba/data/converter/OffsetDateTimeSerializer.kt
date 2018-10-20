@@ -1,4 +1,4 @@
-package nba.data.converter
+package hunterchung.nba.data.converter
 
 import kotlinx.serialization.KInput
 import kotlinx.serialization.KOutput

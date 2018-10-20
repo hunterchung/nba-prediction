@@ -1,9 +1,9 @@
-package nba
+package hunterchung.nba
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import hunterchung.common.OffsetDateTimeConverter
-import nba.data.converter.GameTypeConverter
-import nba.data.converter.TeamTypeConverter
+import hunterchung.nba.data.converter.GameTypeConverter
+import hunterchung.nba.data.converter.TeamTypeConverter
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 

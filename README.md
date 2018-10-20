@@ -1,6 +1,6 @@
-# nba-prediction
+# hunterchung.nba-prediction
 
-This is a sample template for nba-prediction - Below is a brief explanation of what we have generated for you:
+This is a sample template for hunterchung.nba-prediction - Below is a brief explanation of what we have generated for you:
 
 ```bash
 .
@@ -12,7 +12,7 @@ This is a sample template for nba-prediction - Below is a brief explanation of w
 │   │       └── hunterchung                  <-- Source code for a lambda function
 │   │           ├── App.java                <-- Lambda function code
 │   │           └── GatewayResponse.java    <-- POJO for API Gateway Responses object 
-│   └── nba                                <-- Unit tests
+│   └── hunterchung.nba                                <-- Unit tests
 │       └── java
 │           └── hunterchung
 │               └── AppTest.java
@@ -90,7 +90,7 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 ```bash
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name nba-prediction \
+    --stack-name hunterchung.nba-prediction \
     --capabilities CAPABILITY_IAM
 ```
 
@@ -100,7 +100,7 @@ After deployment is complete you can run the following command to retrieve the A
 
 ```bash
 aws cloudformation describe-stacks \
-    --stack-name nba-prediction \
+    --stack-name hunterchung.nba-prediction \
     --query 'Stacks[].Outputs'
 ```
 
@@ -109,7 +109,7 @@ aws cloudformation describe-stacks \
 We use `JUnit` for testing our code and you can simply run the following command to run our tests:
 
 ```bash
-mvn nba
+mvn hunterchung.nba
 ```
 
 # Appendix
@@ -126,12 +126,12 @@ sam package \
 
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name nba-prediction \
+    --stack-name hunterchung.nba-prediction \
     --capabilities CAPABILITY_IAM \
     --parameter-overrides MyParameterSample=MySampleValue
 
 aws cloudformation describe-stacks \
-    --stack-name nba-prediction --query 'Stacks[].Outputs'
+    --stack-name hunterchung.nba-prediction --query 'Stacks[].Outputs'
 ```
 
 ## Bringing to the next level
@@ -139,7 +139,7 @@ aws cloudformation describe-stacks \
 Here are a few ideas that you can use to get more acquainted as to how this overall process works:
 
 * Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit nba to capture that
+* Update unit hunterchung.nba to capture that
 * Package & Deploy
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
