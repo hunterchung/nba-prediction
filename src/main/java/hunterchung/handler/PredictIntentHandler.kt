@@ -29,7 +29,7 @@ class PredictIntentHandler : RequestHandler {
         val predictInput = PredictInput.from(intentRequest)
         val timeZoneId = GetUserTimeZone.call(input)
 
-        val game = ScheduleManager.fetchGame(predictInput.date.atStartOfDay(timeZoneId), predictInput.team)
+        val game = ScheduleManager.fetchGame(predictInput.date, timeZoneId, predictInput.team)
 
         if (game == null) {
             val responseText = "Cannot find ${predictInput.team.readName} game on ${predictInput.date}"
@@ -38,17 +38,16 @@ class PredictIntentHandler : RequestHandler {
                 .withSimpleCard("NBA Prediction", responseText)
                 .build()
         } else {
-            val prediction =
-                Prediction(
-                    input.requestEnvelope.session.user.userId,
-                    game.id,
-                    game,
-                    predictInput.team,
-                    intentRequest.timestamp
-                )
+            val prediction = Prediction(
+                input.requestEnvelope.session.user.userId,
+                game.id,
+                game,
+                predictInput.team,
+                intentRequest.timestamp
+            )
             PredictionManager.savePrediction(prediction)
 
-            val responseText = "You predict ${predictInput.team.readName} will win the game on ${predictInput.date}"
+            val responseText = "You predict ${prediction.toSpeech(timeZoneId)}"
             return input.responseBuilder
                 .withSpeech(responseText)
                 .withSimpleCard("NBA Prediction", responseText)

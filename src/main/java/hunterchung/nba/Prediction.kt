@@ -44,9 +44,7 @@ data class Prediction(
 
     fun toSpeech(timeZoneId: ZoneId) = """
         ${team.readName} will win against ${theOtherTeam.readName} on ${game.startTime.atZoneSameInstant(timeZoneId).format(
-        DateTimeFormatter.ofPattern(
-            "MMMM dd"
-        )
+        DateTimeFormatter.ofPattern("MMMM dd")
     )}.
     """.trimIndent()
 }

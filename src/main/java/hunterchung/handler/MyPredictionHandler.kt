@@ -40,8 +40,8 @@ class MyPredictionHandler : RequestHandler {
         return when (predictions.size) {
             0 -> "You don't have any prediction yet."
             1 -> "Here is your prediction. ${predictions.first().toSpeech(timeZoneId)}"
-            10 -> "Here are your recent 10 predictions. ${predictions.joinToString(".\n") { it.toSpeech(timeZoneId) }}"
-            else -> "You have ${predictions.size} predictions. ${predictions.joinToString(".\n") {
+            10 -> "Here are your recent 10 predictions. ${predictions.joinToString("\n") { it.toSpeech(timeZoneId) }}"
+            else -> "You have ${predictions.size} predictions. ${predictions.joinToString("\n") {
                 it.toSpeech(
                     timeZoneId
                 )
