@@ -40,7 +40,7 @@ data class Prediction(
         const val TABLE_NAME = "NBA_prediction"
     }
 
-    private val theOtherTeam: Team get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
+    val theOtherTeam: Team get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
 
     fun toSpeech(timeZoneId: ZoneId) = """
         ${team.readName} will win against ${theOtherTeam.readName} on ${game.startTime.atZoneSameInstant(timeZoneId).format(

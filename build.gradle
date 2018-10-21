@@ -34,7 +34,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
 
@@ -51,7 +50,6 @@ dependencies {
     compile(
         'com.amazonaws:aws-lambda-java-core:1.2.0',
         'com.amazonaws:aws-lambda-java-log4j2:1.0.0',
-        'com.amazonaws:aws-java-sdk-dynamodb:1.11.422'
     )
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -78,16 +76,3 @@ task buildZip(type: Zip) {
 }
 
 build.dependsOn buildZip
-
-//task localTest(type:Exec) {
-//    dependsOn build
-//    commandLine '/Users/hunterchung/Library/Python/2.7/bin/sam'
-////    local invoke HelloWorldFunction -e sampleInput/basic.json'
-//    standardOutput new ByteArrayOutputStream()
-//    errorOutput    new ByteArrayOutputStream()
-//
-//    doLast {
-//        logger.info(standardOutput.toString())
-//        logger.error(errorOutput.toString())
-//    }
-//}

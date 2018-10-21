@@ -7,8 +7,10 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.requestType
 import hunterchung.call.GetUserTimeZone
+import hunterchung.extensions.addTemplate
 import hunterchung.nba.Prediction
 import hunterchung.nba.PredictionManager
+import hunterchung.template.PredictionTemplate
 import org.apache.logging.log4j.LogManager
 import java.time.ZoneId
 import java.util.*
@@ -31,8 +33,8 @@ class MyPredictionHandler : RequestHandler {
         val speechText = getResponseText(predictions, timeZoneId)
 
         return input.responseBuilder
+            .addTemplate(PredictionTemplate.from("NBA Prediction", predictions, timeZoneId))
             .withSpeech(speechText)
-            .withSimpleCard("NBA Prediction", speechText)
             .build()
     }
 
