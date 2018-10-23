@@ -10,6 +10,9 @@ import hunterchung.nba.data.converter.TeamTypeConverter
 import kotlinx.serialization.Serializable
 import java.time.OffsetDateTime
 
+/**
+ * Data class for NBA game.
+ */
 @Serializable
 @DynamoDBTable(tableName = "NBA_schedule")
 data class Game(

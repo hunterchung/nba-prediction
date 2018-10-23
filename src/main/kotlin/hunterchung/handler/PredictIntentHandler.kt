@@ -5,12 +5,14 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.IntentRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
-import hunterchung.call.GetUserTimeZone
-import hunterchung.nba.PredictInput
+import hunterchung.extensions.getTopResolutionValue
+import hunterchung.extensions.requestTimeZone
 import hunterchung.nba.Prediction
 import hunterchung.nba.PredictionManager
 import hunterchung.nba.ScheduleManager
+import hunterchung.nba.Team
 import org.apache.logging.log4j.LogManager
+import java.time.LocalDate
 import java.util.*
 
 /**
@@ -19,6 +21,9 @@ import java.util.*
 class PredictIntentHandler : RequestHandler {
     companion object {
         private val logger = LogManager.getLogger(PredictIntentHandler::class.java)
+
+        private const val SLOT_DATE = "date"
+        private const val SLOT_TEAM = "team"
     }
 
     override fun canHandle(input: HandlerInput) = input.matches(intentName("predict"))
@@ -26,13 +31,19 @@ class PredictIntentHandler : RequestHandler {
     override fun handle(input: HandlerInput): Optional<Response> {
         val intentRequest =
             input.request as? IntentRequest ?: throw IllegalArgumentException("Cannot Parse the request.")
-        val predictInput = PredictInput.from(intentRequest)
-        val timeZoneId = GetUserTimeZone.call(input)
+        val teamId = intentRequest.intent.slots[SLOT_TEAM]?.getTopResolutionValue()?.id
+            ?: throw IllegalArgumentException("Cannot find team slot in request.")
+        val dateString = intentRequest.intent.slots[SLOT_DATE]?.value
+            ?: throw IllegalArgumentException("Cannot find date slot in request.")
+        val team = Team.valueOf(teamId)
+        val date = LocalDate.parse(dateString)
 
-        val game = ScheduleManager.fetchGame(predictInput.date, timeZoneId, predictInput.team)
+        val timeZoneId = input.requestTimeZone()
+
+        val game = ScheduleManager.fetchGame(date, timeZoneId, team)
 
         if (game == null) {
-            val responseText = "Cannot find ${predictInput.team.readName} game on ${predictInput.date}"
+            val responseText = "Cannot find ${team.readName} game on $date"
             return input.responseBuilder
                 .withSpeech(responseText)
                 .withSimpleCard("NBA Prediction", responseText)
@@ -42,7 +53,7 @@ class PredictIntentHandler : RequestHandler {
                 input.requestEnvelope.session.user.userId,
                 game.id,
                 game,
-                predictInput.team,
+                team,
                 intentRequest.timestamp
             )
             PredictionManager.savePrediction(prediction)

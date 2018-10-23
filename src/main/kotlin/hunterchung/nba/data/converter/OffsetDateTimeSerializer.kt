@@ -6,6 +6,9 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import java.time.OffsetDateTime
 
+/**
+ * Custom serialization for [OffsetDateTime].
+ */
 @Serializer(forClass = OffsetDateTime::class)
 class OffsetDateTimeSerializer : KSerializer<OffsetDateTime> {
     override fun load(input: KInput): OffsetDateTime = OffsetDateTime.parse(input.readStringValue())

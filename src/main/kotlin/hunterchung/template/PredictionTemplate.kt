@@ -1,12 +1,22 @@
 package hunterchung.template
 
-import com.amazon.ask.model.interfaces.display.*
+import com.amazon.ask.model.interfaces.display.ListItem
+import com.amazon.ask.model.interfaces.display.ListTemplate1
+import com.amazon.ask.model.interfaces.display.PlainText
+import com.amazon.ask.model.interfaces.display.TextContent
+import com.amazon.ask.model.interfaces.display.TextField
 import hunterchung.nba.Prediction
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * A collection of helper functions for [ListTemplate1].
+ */
 object PredictionTemplate {
+    /**
+     * Parse a list of predictions to [ListTemplate1].
+     */
     fun from(title: String, predictions: List<Prediction>, zoneId: ZoneId): ListTemplate1 {
         val listItems = predictions.map {
             val textContent = TextContent.builder()

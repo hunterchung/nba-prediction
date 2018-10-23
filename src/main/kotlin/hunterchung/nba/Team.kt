@@ -1,5 +1,8 @@
 package hunterchung.nba
 
+/**
+ * Represent all NBA teams.
+ */
 enum class Team(val id: String, val teamName: String) {
     ATLANTA_HAWKS("1610612737", "Hawks"),
     BOSTON_CELTICS("1610612738", "Celtics"),

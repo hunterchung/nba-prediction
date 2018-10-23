@@ -5,7 +5,9 @@ import com.amazon.ask.Skills
 import hunterchung.handler.MyPredictionHandler
 import hunterchung.handler.PredictIntentHandler
 
-
+/**
+ * Handle all requests.
+ */
 class NbaPredictionStreamHandler : SkillStreamHandler(NbaPredictionStreamHandler.skill) {
     companion object {
         private val skill = Skills.standard()
