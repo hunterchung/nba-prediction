@@ -1,6 +1,7 @@
 package hunterchung.nba
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted
@@ -47,7 +48,9 @@ data class Prediction(
         const val TABLE_NAME = "NBA_prediction"
     }
 
-    val theOtherTeam: Team get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
+    val theOtherTeam: Team
+        @DynamoDBIgnore
+        get() = if (game.homeTeam == team) game.visitorTeam else game.homeTeam
 
     /**
      * Convert the prediction into a speech.
